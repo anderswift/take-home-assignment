@@ -16,7 +16,11 @@ function App() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    setTextOutput('Your formatted text will go here!')
+    if (conversionMode === 'lowercase') {
+      setTextOutput(textInput.toLocaleLowerCase());
+    } else if (conversionMode === 'uppercase') {
+      setTextOutput(textInput.toLocaleUpperCase());
+    }
   };
 
   return (
@@ -24,7 +28,9 @@ function App() {
       <header>
         <h1>Career Lab text-case converter</h1>
       </header>
+
         <form onSubmit={handleSubmit}>
+
           <div className="form-control form-control__text">
             <label htmlFor="text">Text to be converted:</label>
             <textarea
@@ -33,6 +39,7 @@ function App() {
               value={textInput}
             />
           </div>
+
           <div className="form-control form-control__radio">
             <input
               type="radio"
@@ -44,6 +51,7 @@ function App() {
             />
             <label htmlFor="conversion-0">Convert text to lowercase</label>
           </div>
+
           <div className="form-control form-control__radio">
             <input
               type="radio"
@@ -55,11 +63,14 @@ function App() {
             />
             <label htmlFor="conversion-1">Convert text to uppercase</label>
           </div>
+
           <input type="submit" value="Submit" />
+
           <div className="result-wrapper form-control form-control__text">
             <label htmlFor="result">Converted text:</label>
             <output id="result">{textOutput}</output>
           </div>
+
         </form>
     </div>
   );
